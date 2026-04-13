@@ -1,0 +1,15 @@
+{
+  "name": "cube",
+  "version": "1.0.0",
+  "description": "Tooling to deploy containerized apps over ssh to linux vms",
+  "type": "module",
+  "bin": {
+    "cube": "bin/cube.mjs"
+  },
+  "scripts": {
+    "start": "node bin/cube.mjs"
+  },
+  "keywords": [],
+  "author": "Abraham Sesay",
+  "license": "ISC"
+}
