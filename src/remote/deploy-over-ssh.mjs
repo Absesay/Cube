@@ -1,23 +1,9 @@
 import { runCommand } from "../lib/run-command.mjs";
+import { buildRemoteScript } from "./build-remote-script.mjs";
 
-export async function deployOverSsh(config, fullImage) {
+export async function deployOverSSH(config, imageRef) {
     const remoteHost = `${config.sshUser}@${config.sshHost}`;
-
-    const remoteScript = `
-        set -e
-
-        docker pull ${fullImage}
-
-        if docker ps -a --format '{{.Names}}' | grep -q '^${config.containerName}$'; then
-            docker stop ${config.containerName} || true
-            docker rm ${config.containerName} || true
-        fi
-
-        docker run -d \
-            --name ${config.containerName} \
-            -p ${config.hostPort}:${config.containerPort} \
-            ${fullImage}
-    `;
+    const remoteScript = buildRemoteScript(config, imageRef);
 
     await runCommand("ssh", [remoteHost, remoteScript]);
 }

@@ -1,6 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+/** 
+ * A singular source of validation for all the settings
+ * that are needed for deployment.
+ */
 export async function loadConfig() {
     const configPath = path.resolve(process.cwd(), "cube.config.json");
     const raw = await fs.readFile(configPath, "utf8");
@@ -12,7 +16,7 @@ export async function loadConfig() {
 }
 
 function validateConfig(config) {
-    const required = [
+    const requiredKeys = [
         "appName",
         "registry",
         "imageName",
@@ -24,8 +28,8 @@ function validateConfig(config) {
         "hostPort"
     ];
 
-    for (const key of required) {
-        if (!config[key]) {
+    for (const key of requiredKeys) {
+        if (config[key] === undefined || config[key] === null || config[key] === "") {
             throw new Error(`Missing required config key: ${key}`);
         }
     }
