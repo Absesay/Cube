@@ -1,11 +1,11 @@
 {
-    "appName": "hello",
-    "registry": "docker.io",
-    "imageName": "myuser/my-app",
-    "tag": "latest",
-    "sshUser": "deploy",
-    "sshHost": "example.com",
-    "containerName": "my-app",
-    "containerPort": 3000,
-    "hostPort": 3000
-  }
+  "appName": "myapp",
+  "registry": "docker.io/yourdockeruser",
+  "imageName": "myapp",
+  "tag": "latest",
+  "sshUser": "ubuntu",
+  "sshHost": "203.0.113.10",
+  "containerName": "myapp",
+  "hostPort": 3000,
+  "containerPort": 3000
+}
